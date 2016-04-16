@@ -1,0 +1,55 @@
+<!-- AGENDAS DEL MEDICO -->
+<%= form_for :cuenta, :html => {:class => 'form-inline'}, url: cuenta_agenda_path do |f| %>
+
+  <div class="container">
+    <div class="row">
+        <%= f.text_field :NombreAgenda, :placeholder => "Nombre de Agenda", :class => 'form-control' %>
+    </div>
+
+    <% @horarios.each do |hor| %>
+      <% i = 0 %>
+      <div class="row">
+          <div class="form-group col-xs-offset-1">
+              <%= f.select("dia", Dia.all.collect {|p| [ p.Dia, p.ID_Dia ] }, {prompt: 'Seleccione el dia'}, {class: 'form-control', selected: hor.ID_Dia }, :selected => 1) %>
+              <div class='input-group date' id="datetimepicker<%= i %>" >
+                  <%= f.text_field :horaIniciox, :class => 'form-control', :value => hor.Hora_Inicio, 'data-submit_clear'=> hor.ID_Dia %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <% i += 1 %>
+    <% end %>
+
+    <div class="row">
+        <div class="form-group col-xs-offset-1">
+            <%= f.select("dia", Dia.all.collect {|p| [ p.Dia, p.ID_Dia ] }, {prompt: 'Seleccione el dia'}, {class: 'form-control'}) %>
+            <div class='input-group date' id='datetimepicker3'>
+                <%= f.text_field :horaInicio, :class => 'form-control' %>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <button class="btn btn-success" type="submit" name="agr_horario">+</button>
+        </div>
+    </div>
+
+
+  </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+            });
+        });
+
+        $(function () {
+            $('#datetimepickern').datetimepicker({
+                format: 'LT'
+            });
+        });
+
+    </script>
+<% end %>

@@ -1,0 +1,75 @@
+<!-- INFORMACION PERSONAL DEL MEDICO -->
+
+<%link_to %>
+
+<br>
+
+<%= form_for :cuenta, url: cuenta_perfil_path do |f| %>
+<%= @persona.Nombre %>
+<% end %>
+
+
+<br>
+<!-- EDUCACION DEL MEDICO -->
+<%= form_for :cuenta, url: cuenta_educacion_path do |f| %>
+  <div style="border:1px solid black;">
+    <h3> Educacion </h3>
+    <div id="educacion">
+      <% @medico.educacion.each do |edu| %>
+        <div>
+          <%= best_in_place [:cuenta, edu], :Titulo_Obtenido %>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <%= f.text_field :Titulo, :placeholder => "Tituto Obtenido" %>
+    <button class="btn btn-success" type="submit">+</button>
+
+  </div>
+<% end %>
+
+<br>
+
+<!-- EXPERIENCIA DEL MEDICO -->
+<%= form_for :cuenta, url: cuenta_experiencia_path do |f| %>
+  <div style="border:1px solid black;">
+    <h3> Experiencia </h3>
+      <% @medico.experiencia.each do |exp| %>
+        <div>
+            <%= best_in_place [:cuenta, exp], :Experiencia %>
+        </div>
+      <% end %>
+      <br>
+      <%= f.text_field :Experiencia, :placeholder => "Experiencia Obtenido" %>
+      <button class="btn btn-success" type="submit">+</button>
+      <br>
+  </div>
+<% end %>
+
+<br>
+
+
+<!-- AGENDAS DEL MEDICO -->
+<%= form_for :cuenta, url: cuenta_agendas_path do |f| %>
+  <div style="border:1px solid black;">
+    <h3> Agendas </h3>
+      <% @medico.agenda.each do |agen| %>
+        <div>
+            <%= best_in_place [:cuenta, agen], :Nombre %>
+            <%= link_to "Edita el horario de tu agenda", cuenta_horario_path(:agenda => agen.Nombre) %>
+        </div>
+      <% end %>
+      <br>
+      <%= f.text_field :Nombre, :placeholder => "Nombre de la agenda" %>
+      <button class="btn btn-success" type="submit">+</button>
+      <br>
+  </div>
+<% end %>
+
+<br>
+
+
+<!-- CERRAR SESION -->
+<%= form_for :cuenta, url: cuenta_logout_path do |f| %>
+<button class="btn btn-success" type="submit">Cerrar sesi&oacute;n</button>
+<% end %>

@@ -1,0 +1,17 @@
+<%= form_for :cuenta, url: cuenta_login_path do |f| %>
+
+  <% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+  <% end -%>
+
+<span class="input-group-addon" id="basic-correo" style="min-width: 110px;">Usuario o correo</span>
+<%= f.text_field :Usuario, :value => @persona.Usuario , :placeholder => "Usuario o correo", 'aria-describedby' => "basic-correo", :class => "form-control" %>
+
+
+<span class="input-group-addon" id="basic-contrasena" style="min-width: 110px;">Contrase&ntilde;a</span>
+<%= f.password_field :Contrasena, :placeholder => "Contraseña", 'aria-describedby' => "basic-contrasena"%>
+
+
+<button class="btn btn-success" type="submit">Iniciar sesi&oacute;n</button>
+
+<% end %>

@@ -1,0 +1,67 @@
+<%= form_for :registro, url: registro_medico_create_path do |f| %>
+
+    <% if @persona.errors.any? %>
+            <% @persona.errors.messages.each do |attr,msg| %>
+                <div data-alert class="alert-box round">
+                  <%= content_tag :div, msg[0] %>
+                  <a href="#" class="close">&times;</a>
+                </div>
+            <% end %>
+    <% end %>
+
+
+          <span class="input-group-addon" id="basic-nombre" >Nombre</span>
+          <%= f.text_field :Nombre, :placeholder => "Nombre", :value => @persona.Nombre, 'aria-describedby' => "basic-nombre", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-apellido1" style="min-width: 110px;">Primer Apellido</span>
+          <%= f.text_field :Apellido1, :placeholder => "Primer Apellido", :value => @persona.Apellido1, 'aria-describedby' => "basic-apellido1", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-apellido2" style="min-width: 110px;">Segundo Apellido</span>
+          <%= f.text_field :Apellido2, :placeholder => "Segundo Apellido", :value => @persona.Apellido2, 'aria-describedby' => "basic-apellido2", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-identificacion" style="min-width: 110px;">Identificaci&oacute;n</span>
+          <%= f.text_field :Identificacion, :placeholder => "102340567", :value => @persona.Identificacion, 'aria-describedby' => "basic-identificacion", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-identificacion" style="min-width: 110px;">Licencia m&eacute;dica</span>
+          <%= f.text_field :CodigoLicencia, :placeholder => "LM-102340567", :value => @medico.Codigo_Licencia, 'aria-describedby' => "basic-identificacion", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-identificacion" style="min-width: 110px;">Fecha de nacimiento</span>
+          <%= date_field(:persona, :Fecha_Nacimiento, :value => @persona.Fecha_Nacimiento) %>
+
+
+
+          <span class="input-group-addon" id="basic-correo" style="min-width: 110px;">Correo</span>
+          <%= f.text_field :Correo, :placeholder => "correo@dominio.com", :value => @persona.Correo, 'aria-describedby' => "basic-correo", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-usuario" style="min-width: 110px;">Usuario</span>
+          <%= f.text_field :Usuario, :placeholder => "Nombre de usuario", :value => @persona.Usuario, 'aria-describedby' => "basic-usuario", :class => "form-control" %>
+          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+
+
+
+          <span class="input-group-addon" id="basic-contrasena" style="min-width: 110px;">Contrase&ntilde;a</span>
+          <%= f.password_field :Contrasena, :placeholder => "Contraseña", 'aria-describedby' => "basic-contrasena", :class => "form-control" %>
+
+
+
+          <span class="input-group-addon" id="basic-contrasena" style="min-width: 110px;">Confirme la contrase&ntilde;a</span>
+          <%= f.password_field :CContrasena, :placeholder => "Contraseña", 'aria-describedby' => "basic-contrasena"%>
+
+
+
+          <button class="btn btn-success" type="submit">Registrarse</button>
+
+
+<% end %>

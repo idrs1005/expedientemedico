@@ -1,0 +1,64 @@
+<!-- HORARIO DE AGENDA DEL MEDICO -->
+<%= form_for :cuenta, :html => {:class => 'form-inline'}, url: cuenta_horario_path do |f| %>
+
+  <% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+  <% end -%>
+
+  <div class="container">
+    <div class="row">
+        <%= @agenda.Nombre %>
+    </div>
+
+    <% @agenda.horario.each do |hor| %>
+      <div class="row">
+          <div class="form-group col-xs-offset-1">
+              <label for=""><%= Dia.find_by(ID_Dia: hor.ID_Dia).Dia %> de </label>
+              <label for=""><%= hor.Hora_Inicio.strftime("%I:%M%p") %> a </label>
+              <label for=""><%= hor.Hora_Final.strftime("%I:%M%p")  %></label>
+          </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+        <div class="form-group col-xs-offset-1">
+            <%= f.select("dia", Dia.all.collect {|p| [ p.Dia, p.ID_Dia ] }, {prompt: 'Seleccione el dia'}, {class: 'form-control'}) %>
+            <label for="">Comienzo</label>
+            <div class='input-group date' id='horaInicio'>
+                <%= f.text_field :horaInicio, :class => 'form-control' %>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <label for="">Final</label>
+            <div class='input-group date' id='horaFinal'>
+                <%= f.text_field :horaFinal, :class => 'form-control' %>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <button class="btn btn-success" type="submit">+</button>
+        </div>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-success" type="submit" name="finalizar">Finalizar edición</button>
+    </div>
+
+  </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#horaInicio').datetimepicker({
+              format: 'LT'
+            });
+        });
+
+        $(function () {
+            $('#horaFinal').datetimepicker({
+              format: 'LT'
+            });
+        });
+
+    </script>
+<% end %>
